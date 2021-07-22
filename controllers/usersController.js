@@ -9,12 +9,6 @@ var async = require('async');
 const { body,validationResult } = require("express-validator");
 const User = require('../models/user'); 
 
-// Signup get method
-
-exports.user_signup_get = function (req, res) { 
-    res.render("signup_form")
-};
-
 // Login get method
 // Note: login controller logic moved to app.js due to middleware bugs
 

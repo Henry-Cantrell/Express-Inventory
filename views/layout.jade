@@ -9,7 +9,12 @@ html(lang='en')
     script(src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js", integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV", crossorigin="anonymous")
     link(rel='stylesheet', href='/stylesheets/style.css')
   body
-    div(class='container-fluid')
+    nav.navbar.navbar-expand-lg.navbar-dark.bg-dark.fixed-top
+     .container-fluid
+      a.navbar-brand(href='/' style='margin-left:35px') Motorcycles and accessories
+    
+
+    div(class='container-fluid' style='margin-top:20px')
       div(class='row')
         div(class='col-sm-2')
           block sidebar
