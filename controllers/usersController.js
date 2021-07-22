@@ -62,7 +62,7 @@ exports.user_signup_post = function (req, res, next){
           if (err) { 
             return next(err);
           }
-          res.redirect("/");
+          res.redirect("/users/login");
         });
       }
     });
