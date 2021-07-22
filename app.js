@@ -60,35 +60,6 @@ app.use(express.urlencoded({ extended: false }));
 
 app.get("/users/login", (req, res) => res.render("login_form"));
 
-// Passport login methods
-
-passport.use(
-  new LocalStrategy((username, password, done) => {
-    User.findOne({ username: username }, (err, user) => {
-      if (err) { 
-        return done(err);
-      }
-      if (!user) {
-        return done(null, false, { message: "Incorrect username" });
-      }
-      if (user.password !== password) {
-        return done(null, false, { message: "Incorrect password" });
-      }
-      return done(null, user);
-    });
-  })
-);
-
-passport.serializeUser(function(user, done) {
-  done(null, user.id);
-});
-
-passport.deserializeUser(function(id, done) {
-  User.findById(id, function(err, user) {
-    done(err, user);
-  });
-});
-
 // Login passport methods
 passport.use(
   //same usernames collide
@@ -135,7 +106,7 @@ app.post(
   "/users/login",
   passport.authenticate("local", {
     successRedirect: "/",
-    failureRedirect: "/"
+    failureRedirect: ""
   })
 );
 

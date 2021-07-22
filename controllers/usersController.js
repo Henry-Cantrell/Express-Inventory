@@ -40,6 +40,12 @@ exports.user_signup_get = function (req, res) {
 //  })
 //)};
 
+// Signup get method
+
+exports.user_signup_get = function (req, res) { 
+  res.render("signup_form")
+};
+
 // Signup post method
 
 exports.user_signup_post = function (req, res, next){ 
