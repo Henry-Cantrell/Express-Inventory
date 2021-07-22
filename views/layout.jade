@@ -1,0 +1,70 @@
+doctype html
+html(lang='en')
+  head
+    title= title
+    meta(charset='utf-8')
+    meta(name='viewport', content='width=device-width, initial-scale=1')
+    link(rel="stylesheet", href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css", integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z", crossorigin="anonymous")
+    script(src="https://code.jquery.com/jquery-3.5.1.slim.min.js", integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj", crossorigin="anonymous")
+    script(src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js", integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV", crossorigin="anonymous")
+    link(rel='stylesheet', href='/stylesheets/style.css')
+  body
+    div(class='container-fluid')
+      div(class='row')
+        div(class='col-sm-2')
+          block sidebar
+            ul(class='sidebar-nav list-group')
+             ul.list-group
+              li(class='list-group-item')
+                form(action="/")
+                 input(type="submit" value="Home" class="btn btn-secondary btn-block") 
+              li(class='list-group-item')
+               form(action="/inventory/motorcycles") 
+                input(type="submit" value="Motorcycles" class="btn btn-secondary btn-block")
+              li(class='list-group-item')
+               form(action="/inventory/gear") 
+                input(type="submit" value="Gear" class="btn btn-secondary btn-block")
+              li(class='list-group-item')
+               form(action="/inventory/manufacturers")
+                input(type="submit" value="Manufacturers" class="btn btn-secondary btn-block")
+              li(class='list-group-item')
+               form(action="/inventory/brands") 
+                input(type="submit" value="Brands" class="btn btn-secondary btn-block")
+              li(class='list-group-item')
+                hr
+              li(class='list-group-item')
+               form(action="/inventory/motorcycle/create") 
+                input(type="submit" value="New Motorcycle" class="btn btn-secondary btn-block")
+              li(class='list-group-item')
+                form(action="/inventory/manufacturer/create") 
+                 input(type="submit" value="New Manufacturer" class="btn btn-secondary btn-block")
+              li(class='list-group-item')
+                form(action="/inventory/gear/create")
+                 input(type="submit" value="New Gear" class="btn btn-secondary btn-block")
+              li(class='list-group-item')
+               form(action="/inventory/brand/create")
+                input(type="submit" value="New Brand" class="btn btn-secondary btn-block")
+             if(!currentUser)
+              li(class='list-group-item')
+               form(action="/users/login")
+                input(type="submit" value="Login" class="btn btn-secondary btn-block")
+             else if(currentUser)
+              li(class='list-group-item')
+               form(method = "GET", action="/users/logout")
+                input(type="submit" value="Signout" class="btn btn-secondary btn-block")
+
+        div(class='col-sm-10')
+          block content
+   
+
+ if errors
+   ul
+    for error in errors
+      li!= error.msg
+        
+        
+        
+
+
+
+

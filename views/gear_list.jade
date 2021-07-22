@@ -1,0 +1,12 @@
+extends layout
+
+block content
+  h1= title
+
+  ul(class="list-group w-25")
+    each gear in gear_list
+      li(class='list-group-item')
+        a(href=gear.url class="btn btn-secondary btn-block") #{gear.gear_name}
+
+    else
+      li There are no gears.

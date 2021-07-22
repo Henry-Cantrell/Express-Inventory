@@ -1,0 +1,19 @@
+
+extends layout
+
+block content
+
+  h1 #{manufacturer.manufacturer_name}
+
+  div(style='margin-left:20px;margin-top:20px')
+
+    h4 Motorcycles by this manufacturer currently in stock:
+
+    dl
+      each manufacturer_motorcycle in manufacturer_motorcycles
+        dt
+          a(href='/inventory/motorcycle/' + manufacturer_motorcycle.id) #{manufacturer_motorcycle.model}
+        dd #{manufacturer_motorcycle.summary}
+
+   p
+    a(href=manufacturer.url+'/update') Update Manufacturer

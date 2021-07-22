@@ -1,0 +1,18 @@
+extends layout
+
+block content
+  h1 #{brand.brand_name}
+
+    div(style='margin-left:20px;margin-top:20px')
+
+    h4 Items by this brand currently in stock:
+
+    dl
+      each brand_gear in brand_gears
+        dt
+          a(href='/inventory/gear/' + brand_gear.id) #{brand_gear.gear_name}
+        dd #{brand_gear.summary}
+
+    p
+      a(href=brand.url+'/update') Update Brand
+    

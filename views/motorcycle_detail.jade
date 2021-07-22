@@ -1,0 +1,17 @@
+
+extends layout
+
+block content
+  h1 #{motorcycle.model}
+
+  p #[strong Manufacturer:] #{motorcycle.manufacturer.manufacturer_name}
+  p #[strong Summary:] #{motorcycle.summary}
+  p #[strong Type:] #{motorcycle.type.name}
+
+  hr
+  //p
+    //a(href=book.url+'/delete') Delete Book
+  p
+    a(href=motorcycle.url+'/update') Update Motorcycle
+
+    

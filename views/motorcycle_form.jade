@@ -1,0 +1,50 @@
+extends layout
+
+block content
+  h1= title
+
+  form(method='POST' action='')
+    div.form-group
+      label(for='model') Model:
+      input#model.form-control(type='text', placeholder='Model of motorcycle' name='model' required='true' value=(undefined===motorcycle ? '' : motorcycle.model) )
+    div.form-group
+      label(for='type') Type:
+      select#type.form-control(type='select' placeholder='Select type' name='type' required='true' )
+        for type in types
+          if motorcycle
+            //- Handle GET form, where motorcycle.type is an object, and POST form, where it is a string.
+            option(
+              value=type._id
+              selected=(
+                type._id.toString()==motorcycle.type._id
+                || type._id.toString()==motorcycle.type
+              ) ? 'selected' : false
+            ) #{type.name}
+          else
+            option(value=type._id) #{type.name}
+    div.form-group
+      label(for='manufacturer') Manufacturer:
+      select#manufacturer.form-control(type='select' placeholder='Select manufacturer' name='manufacturer' required='true' )
+        for manufacturer in manufacturers
+          if motorcycle
+            //- Handle GET form, where motorcycle.manufacturer is an object, and POST form, where it is a string.
+            option(
+              value=manufacturer._id
+              selected=(
+                manufacturer._id.toString()==motorcycle.manufacturer._id
+                || manufacturer._id.toString()==motorcycle.manufacturer
+              ) ? 'selected' : false
+            ) #{manufacturer.manufacturer_name}
+          else
+            option(value=manufacturer._id) #{manufacturer.manufacturer_name}
+    div.form-group
+      label(for='summary') Summary:
+      textarea#summary.form-control(type='textarea', placeholder='Summary' name='summary' required='true') #{undefined===motorcycle ? '' : motorcycle.summary}
+    button.btn.btn-primary(type='submit') Submit
+
+  if errors
+    ul
+      for error in errors
+        li!= error.msg
+
+        

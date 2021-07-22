@@ -1,0 +1,12 @@
+extends layout
+
+block content
+  h1= title
+
+  ul(class="list-group w-25")
+    each manufacturer in manufacturer_list
+      li(class='list-group-item')
+        a(href=manufacturer.url class="btn btn-secondary btn-block") #{manufacturer.manufacturer_name}
+
+    else
+      li There are no manufacturers.

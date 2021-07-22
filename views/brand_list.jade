@@ -1,0 +1,12 @@
+extends layout
+
+block content
+  h1= title
+
+  ul(class="list-group w-25")
+    each brand in brand_list
+      li(class='list-group-item')
+        a(href=brand.url class="btn btn-secondary btn-block") #{brand.brand_name}
+
+    else
+      li There are no brands.

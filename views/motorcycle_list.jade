@@ -1,0 +1,12 @@
+extends layout
+
+block content
+  h1= title
+
+  ul(class="list-group w-25")
+    each motorcycle in motorcycle_list
+      li(class='list-group-item')
+        a(href=motorcycle.url class="btn btn-secondary btn-block") #{motorcycle.model}
+
+    else
+      li There are no motorcycles.

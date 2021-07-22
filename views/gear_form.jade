@@ -1,0 +1,50 @@
+extends layout
+
+block content
+  h1= title
+
+  form(method='POST' action='/inventory/gear/create')
+    div.form-group
+      label(for='gear_name') Gear name:
+      input#gear_name.form-control(type='text', placeholder='Gear name' name='gear_name' required='true' value=(undefined===gear ? '' : gear.gear_name) )
+    div.form-group
+      label(for='brand') Brand:
+      select#brand.form-control(brand='select' placeholder='Select brand' name='brand' required='true' )
+        for brand in brands
+          if gear
+            //- Handle GET form, where gear.brand is an object, and POST form, where it is a string.
+            option(
+              value=brand._id
+              selected=(
+                brand._id.toString()==gear.brand._id
+                || brand._id.toString()==gear.brand
+              ) ? 'selected' : false
+            ) #{brand.brand_name}
+          else
+            option(value=brand._id) #{brand.brand_name}
+    div.form-group
+      label(for='gear_type') Gear type:
+      select#gear_type.form-control(type='select' placeholder='Select gear_type' name='gear_type' required='true' )
+        for gear_type in gear_types
+          if gear
+            //- Handle GET form, where gear.gear_type is an object, and POST form, where it is a string.
+            option(
+              value=gear_type._id
+              selected=(
+                gear_type._id.toString()==gear.gear_type._id
+                || gear_type._id.toString()==gear.gear_type
+              ) ? 'selected' : false
+            ) #{gear_type.name}
+          else
+            option(value=gear_type._id) #{gear_type.name}
+    div.form-group
+      label(for='summary') Summary:
+      textarea#summary.form-control(type='textarea', placeholder='Summary' name='summary' required='true') #{undefined===gear ? '' : gear.summary}
+    button.btn.btn-primary(type='submit') Submit
+
+  if errors
+    ul
+      for error in errors
+        li!= error.msg
+
+        
