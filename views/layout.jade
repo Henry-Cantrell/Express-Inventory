@@ -12,6 +12,16 @@ html(lang='en')
     nav.navbar.navbar-expand-lg.navbar-dark.bg-dark.fixed-top
      .container-fluid
       a.navbar-brand(href='/' style='margin-left:35px') Motorcycles and accessories
+     if(currentUser)
+      a.navbar-brand(href='/' style='margin-left:35px') Cart
+     if(currentUser)
+      a.navbar-brand(href='/' style='margin-left:35px') Manage Listings
+     if(currentUser)
+      a.navbar-brand(href='/' style='margin-left:35px') Profile
+     if(!currentUser)
+      a.navbar-brand(href='/users/login' method='GET' style='margin-left:35px') Login
+     if(currentUser)
+      a.navbar-brand(href='/users/logout' method='GET' style='margin-left:35px') Logout
     
 
     div(class='container-fluid' style='margin-top:20px')
@@ -37,6 +47,7 @@ html(lang='en')
                 input(type="submit" value="Brands" class="btn btn-secondary btn-block")
               li(class='list-group-item')
                 hr
+            if(currentUser)
               li(class='list-group-item')
                form(action="/inventory/motorcycle/create") 
                 input(type="submit" value="New Motorcycle" class="btn btn-secondary btn-block")
@@ -49,14 +60,6 @@ html(lang='en')
               li(class='list-group-item')
                form(action="/inventory/brand/create")
                 input(type="submit" value="New Brand" class="btn btn-secondary btn-block")
-             if(!currentUser)
-              li(class='list-group-item')
-               form(action="/users/login")
-                input(type="submit" value="Login" class="btn btn-secondary btn-block")
-             else if(currentUser)
-              li(class='list-group-item')
-               form(method = "GET", action="/users/logout")
-                input(type="submit" value="Signout" class="btn btn-secondary btn-block")
 
         div(class='col-sm-10')
           block content
