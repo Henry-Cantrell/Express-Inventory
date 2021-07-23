@@ -40,7 +40,7 @@ block content
     div.form-group
       label(for='summary') Summary:
       textarea#summary.form-control(type='textarea', placeholder='Summary' name='summary' required='true') #{undefined===gear ? '' : gear.summary}
-    button.btn.btn-primary(type='submit') Submit
+    button.btn.btn-secondary(type='submit') Submit
 
   if errors
     ul

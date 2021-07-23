@@ -9,7 +9,7 @@ block content
       input#manufacturer_name.form-control(type='text', placeholder='Name of manufacturer' name='manufacturer_name' required='true' value=(undefined===manufacturer ? '' : manufacturer.manufacturer_name ))
       label(for='manufacturer_name') Country:
       input#country.form-control(type='text', placeholder='Country' name='country' required='true' value=(undefined===manufacturer ? '' : manufacturer.country ))
-    button.btn.btn-primary(type='submit') Submit
+    button.btn.btn-secondary(type='submit') Submit
 
   if errors
     ul

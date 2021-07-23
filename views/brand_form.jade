@@ -7,7 +7,7 @@ block content
     div.form-group
       label(for='brand_name') Brand name:
       input#brand_name.form-control(type='text', placeholder='Name of brand' name='brand_name' required='true' value=(undefined===brand ? '' : brand.brand_name ))
-    button.btn.btn-primary(type='submit') Submit
+    button.btn.btn-secondary(type='submit') Submit
 
   if errors
     ul

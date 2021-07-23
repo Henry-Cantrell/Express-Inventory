@@ -17,7 +17,7 @@ form(method='POST' action='')
     input#username.form-control(type='text', placeholder='Username' name='username' style='max-width:250px' required='true' value=(undefined===user ? '' : user.username ))
     label(for='password') Password:
     input#password.form-control(type='password', placeholder='Password' name='password' style='max-width:250px' required='true' value=(undefined===user ? '' : user.password ))
-    button.btn.btn-primary(type='submit') Signup
+    button.btn.btn-secondary(type='submit') Signup
 
 form(method='GET' action="/users/login") 
     button(type="submit" value="Login" class="btn btn-secondary") Login

@@ -7,7 +7,8 @@ var GearSchema = new Schema(
     gear_name: {type: String, required: true},
     brand: {type: Schema.ObjectId, ref: 'Brand', required: true},
     summary: {type: String, required: true},
-    gear_type: {type: Schema.ObjectId, ref: 'GearType', required:true}
+    gear_type: {type: Schema.ObjectId, ref: 'GearType', required:true},
+    listing_creator: {type: Schema.ObjectId, ref: 'User', required: true},
   }
 );
 

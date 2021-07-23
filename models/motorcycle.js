@@ -7,7 +7,8 @@ var MotorcycleSchema = new Schema(
     model: {type: String, required: true},
     manufacturer: {type: Schema.ObjectId, ref: 'Manufacturer', required: true },
     summary: {type: String, required: true},
-    type: {type: Schema.ObjectId, ref: 'Type', required: true }
+    type: {type: Schema.ObjectId, ref: 'Type', required: true },
+    listing_creator: {type: Schema.ObjectId, ref: 'User', required: true},
   }
 );
 
