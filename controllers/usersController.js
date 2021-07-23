@@ -51,40 +51,32 @@ exports.user_signup_get = function (req, res) {
 
 exports.user_signup_post = function (req, res, next){ 
 
-  async.series([
-
-    function(){const cart = new Cart({
+      cart = new Cart({
       motorcycles: [],
       gears: []
-    }).save(err => {
+    }).save(function(err, userCart) {
       if (err) {
        return next(err);
       }
-    }
-    );
-  },
-
-   function() {
-    const userCart = Cart.findOne().sort({_id: -1}).limit(1)
-     bcrypt.hash(req.body.password, 10, (err, hashedPassword) => {
-      if (err) {
-        return next(err);
-      }
       else {
-        const user = new User({
-          username: req.body.username,
-          password: hashedPassword,
-          cart: userCart
-        }).save(err => {
-          if (err) { 
+        bcrypt.hash(req.body.password, 10, (err, hashedPassword) => {
+          if (err) {
             return next(err);
           }
-          res.redirect("/users/login");
-        });
+          else {
+            const user = new User({
+              username: req.body.username,
+              password: hashedPassword,
+              cart: userCart
+            }).save(err => {
+              if (err) { 
+                return next(err);
+              }
+              res.redirect("/users/login");
+            });
+          }
+        })
       }
     })
-  }
-  ])
-    
   };
   
