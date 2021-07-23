@@ -11,7 +11,7 @@ exports.gear_list = function(req, res, next) {
     .exec(function (err, gear_list) {
       if (err) { return next(err); }
       //Successful, so render
-      res.render('gear_list', { title: 'Motorcycle Gear', gear_list: gear_list, listing_creator: listing_creator });
+      res.render('gear_list', { title: 'Motorcycle Gear', gear_list: gear_list });
     });
 };
 
