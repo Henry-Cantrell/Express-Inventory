@@ -10,6 +10,7 @@ var Brand = require('./models/brand')
 var Gear = require('./models/gear')
 var Manufacturer = require('./models/manufacturer')
 var User = require('./models/user')
+var Cart = require('./models/cart');
 
 var mongoose = require('mongoose');
 var mongoDB ="mongodb+srv://Henry:FaL6jJrxQsSSi2V@cluster0.abwln.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";
@@ -24,9 +25,26 @@ var gear_types = []
 var brands = []
 var manufacturers = []
 var users = []
+var carts = []
+
+function cartCreate(username, password, cb) {
+  cartdetail = {user: user}
+
+  var cart = new Cart(cartdetail);
+
+  cart.save(function (err) {
+    if (err) {
+      cb(err, null)
+      return
+    }
+    console.log('New Cart: ' + cart);
+    carts.push(cart)
+    cb(null, cart)
+  }  );
+}
 
 function userCreate(username, password, cb) {
-  userdetail = {username: username, password: password}
+  userdetail = {username: username, password: password, cart: cart}
 
   var user = new User(userdetail);
 
@@ -142,6 +160,16 @@ function createUsers(cb) {
  async.series([
   function(callback) {
     userCreate("testUser", "abc", callback);
+  }
+ ],
+ cb);
+
+}
+
+function createCarts(cb) {
+ async.series([
+  function(callback) {
+    cartCreate(users[0], callback);
   }
  ],
  cb);

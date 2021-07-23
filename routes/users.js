@@ -7,7 +7,10 @@ var users_controller = require('../controllers/usersController')
 // Note: login controller logic moved to app.js due to middleware bugs
 
 //router.get("/login", users_controller.user_login_get);
+
 router.get("/signup", users_controller.user_signup_get);
+router.get("/cart", users_controller.user_cart_get);
+
 ////router.get("/logout", users_controller.user_logout_get)
 
 // Router res to restful posts 

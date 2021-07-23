@@ -8,6 +8,13 @@ const LocalStrategy = require("passport-local").Strategy;
 var async = require('async');
 const { body,validationResult } = require("express-validator");
 const User = require('../models/user'); 
+const Cart = require('../models/cart');
+
+// Cart get method
+
+exports.user_cart_get = function (req, res) {
+     res.render("cart_show")
+};
 
 // Login get method
 // Note: login controller logic moved to app.js due to middleware bugs

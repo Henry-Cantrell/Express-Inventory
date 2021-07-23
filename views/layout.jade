@@ -13,7 +13,7 @@ html(lang='en')
      .container-fluid
       a.navbar-brand(href='/' style='margin-left:35px') Motorcycles and accessories
      if(currentUser)
-      a.navbar-brand(href='' style='margin-left:35px') Cart
+      a.navbar-brand(href='/users/cart' method='GET' style='margin-left:35px') Cart
       a.navbar-brand(href='' style='margin-left:35px') Manage Listings
       a.navbar-brand(href='' style='margin-left:35px') Profile
       a.navbar-brand(href='/users/logout' method='GET' style='margin-left:35px') Logout
