@@ -64,13 +64,13 @@ exports.user_signup_post = function (req, res, next){
     );
   },
 
-   function() {bcrypt.hash(req.body.password, 10, (err, hashedPassword) => {
+   function() {
+    const userCart = Cart.findOne().sort({_id: -1}).limit(1)
+     bcrypt.hash(req.body.password, 10, (err, hashedPassword) => {
       if (err) {
         return next(err);
       }
       else {
-        const userCart = Cart.findOne().sort({_id: -1}).limit(1)
-
         const user = new User({
           username: req.body.username,
           password: hashedPassword,
