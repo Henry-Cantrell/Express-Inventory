@@ -39,8 +39,8 @@ function manufacturerCreate(manufacturer_name, country, cb) {
   }  );
 }
 
-function gearCreate(gear_name, brand, summary, gear_type, cb) {
-  geardetail = {gear_name: gear_name, brand: brand, summary: summary, gear_type: gear_type}
+function gearCreate(gear_name, brand, summary, gear_type, listing_creator, cb) {
+  geardetail = {gear_name: gear_name, brand: brand, summary: summary, gear_type: gear_type, listing_creator: listing_creator}
   
   var gear = new Gear(geardetail);
        
@@ -70,7 +70,7 @@ function typeCreate(name, cb) {
 }
 
 function gearTypeCreate(name, cb) {
-  var gearType = new GearType({ name: name });
+  var gearType = new GearType({ name: name});
        
   gearType.save(function (err) {
     if (err) {
@@ -83,12 +83,13 @@ function gearTypeCreate(name, cb) {
   }   );
 }
 
-function motorcycleCreate(model, manufacturer, summary, type, cb) {
+function motorcycleCreate(model, manufacturer, summary, type, listing_creator, cb) {
   motorcycledetail = { 
     model: model,
     manufacturer: manufacturer,
     summary: summary,
     type: type,
+    listing_creator: listing_creator
   }
   if (type != false) motorcycledetail.type = type
     
