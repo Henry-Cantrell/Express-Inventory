@@ -42,7 +42,7 @@ exports.motorcycle_detail = function(req, res, next) {
             Motorcycle.findById(req.params.id)
               .populate('type')
               .populate('manufacturer')
-              .populate('listing_user')
+              .populate('listing_creator')
               .exec(callback);
         },
 
@@ -85,10 +85,9 @@ exports.motorcycle_create_post = [
   body('manufacturer', 'Manufacturer must not be empty.').trim().isLength({ min: 1 }).escape(),
   body('summary', 'Summary must not be empty.').trim().isLength({ min: 1 }).escape(),
   body('type', 'Type must not be empty').trim().isLength({ min: 1 }).escape(),
-  body('listing_user', 'User must not be empty').trim().isLength({ min: 1 }).escape(),
+  body('listing_creator', 'User must not be empty').trim().isLength({ min: 1 }).escape(),
   // Process request after validation and sanitization.
   (req, res, next) => {
-      
 
       // Extract the validation errors from a request.
       const errors = validationResult(req);
@@ -99,7 +98,7 @@ exports.motorcycle_create_post = [
           manufacturer: req.body.manufacturer,
           summary: req.body.summary,
           type: req.body.type,
-          listing_user: req.body.listing_user
+          listing_creator: req.body.listing_creator
          });
 
       if (!errors.isEmpty()) {
@@ -116,7 +115,7 @@ exports.motorcycle_create_post = [
           }, function(err, results) {
               if (err) { return next(err); }
 
-              res.render('motorcycle_form', { title: 'Create Motorcycle', manufacturers:results.manufacturers, types: results.types, motorcycle: results.motorcycle, listing_user: results.listing_user, errors: errors.array() });
+              res.render('motorcycle_form', { title: 'Create Motorcycle', manufacturers:results.manufacturers, types: results.types, motorcycle: results.motorcycle, listing_creator: results.listing_creator, errors: errors.array() });
           });
           return;
       }
@@ -178,6 +177,7 @@ exports.motorcycle_update_post = [
     body('manufacturer', 'Manufacturer must not be empty.').trim().isLength({ min: 1 }).escape(),
     body('summary', 'Summary must not be empty.').trim().isLength({ min: 1 }).escape(),
     body('type', 'Type must not be empty').trim().isLength({ min: 1 }).escape(),
+    body('listing_creator', 'Type must not be empty').trim().isLength({ min: 1 }).escape(),
 
     // Process request after validation and sanitization.
     (req, res, next) => {
