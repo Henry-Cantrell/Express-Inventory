@@ -42,6 +42,7 @@ exports.motorcycle_detail = function(req, res, next) {
             Motorcycle.findById(req.params.id)
               .populate('type')
               .populate('manufacturer')
+              .populate('listing_user')
               .exec(callback);
         },
 
@@ -84,6 +85,7 @@ exports.motorcycle_create_post = [
   body('manufacturer', 'Manufacturer must not be empty.').trim().isLength({ min: 1 }).escape(),
   body('summary', 'Summary must not be empty.').trim().isLength({ min: 1 }).escape(),
   body('type', 'Type must not be empty').trim().isLength({ min: 1 }).escape(),
+  body('listing_user', 'User must not be empty').trim().isLength({ min: 1 }).escape(),
   // Process request after validation and sanitization.
   (req, res, next) => {
       
@@ -96,7 +98,8 @@ exports.motorcycle_create_post = [
         { model: req.body.model,
           manufacturer: req.body.manufacturer,
           summary: req.body.summary,
-          type: req.body.type
+          type: req.body.type,
+          listing_user: req.body.listing_user
          });
 
       if (!errors.isEmpty()) {
@@ -113,7 +116,7 @@ exports.motorcycle_create_post = [
           }, function(err, results) {
               if (err) { return next(err); }
 
-              res.render('motorcycle_form', { title: 'Create Motorcycle', manufacturers:results.manufacturers, types: results.types, motorcycle: results.motorcycle, errors: errors.array() });
+              res.render('motorcycle_form', { title: 'Create Motorcycle', manufacturers:results.manufacturers, types: results.types, motorcycle: results.motorcycle, listing_user: results.listing_user, errors: errors.array() });
           });
           return;
       }
