@@ -4,8 +4,8 @@ block content
   h1= title
 
   form(method='POST' action='')
-  input(type='hidden' name='listing_user' value=currentUser.id)
     div.form-group
+      input(type='hidden' name='listing_creator' value=currentUser._id)
       label(for='model') Model:
       input#model.form-control(type='text', placeholder='Model of motorcycle' name='model' required='true' value=(undefined===motorcycle ? '' : motorcycle.model) )
     div.form-group
