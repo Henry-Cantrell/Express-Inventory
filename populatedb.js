@@ -9,6 +9,7 @@ var GearType = require('./models/gear_type')
 var Brand = require('./models/brand')
 var Gear = require('./models/gear')
 var Manufacturer = require('./models/manufacturer')
+var User = require('./models/user')
 
 var mongoose = require('mongoose');
 var mongoDB ="mongodb+srv://Henry:FaL6jJrxQsSSi2V@cluster0.abwln.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";
@@ -22,6 +23,23 @@ var types = []
 var gear_types = []
 var brands = []
 var manufacturers = []
+var users = []
+
+function userCreate(username, password, cb) {
+  userdetail = {username: username, password: password}
+
+  var user = new User(userdetail);
+
+  user.save(function (err) {
+    if (err) {
+      cb(err, null)
+      return
+    }
+    console.log('New User: ' + user);
+    users.push(user)
+    cb(null, user)
+  }  );
+}
 
 function manufacturerCreate(manufacturer_name, country, cb) {
   manufacturerdetail = {manufacturer_name: manufacturer_name, country: country}
@@ -120,6 +138,16 @@ function brandCreate(brand_name, cb) {
   }  );
 }
 
+function createUsers(cb) {
+ async.series([
+  function(callback) {
+    userCreate("testUser", "abc", callback);
+  }
+ ],
+ cb);
+
+}
+
 function createTypes(cb) {
   async.series([
       function(callback) {
@@ -148,13 +176,13 @@ function createManufacturerGears(cb) {
           manufacturerCreate('Ducati', 'Italy', callback);
         },
        function(callback) {
-          gearCreate('Schuberth C4', brands[0], 'A full-face motorcycle helmet for speedy rides.', gear_types[0], callback);
+          gearCreate('Schuberth C4', brands[0], 'A full-face motorcycle helmet for speedy rides.', gear_types[0], users[0], callback);
         },
         function(callback) {
-          gearCreate('Dainese Super Rider', brands[1], 'A padded jacket for rough riding.', gear_types[1], callback);
+          gearCreate('Dainese Super Rider', brands[1], 'A padded jacket for rough riding.', gear_types[1], users[0], callback);
         },
         function(callback) {
-          gearCreate('X-0 Armored Leggings', brands[0], 'Armored pants for emergency sliding.', gear_types[2], callback);
+          gearCreate('X-0 Armored Leggings', brands[0], 'Armored pants for emergency sliding.', gear_types[2], users[0], callback);
         },
         ],
         // optional callback
@@ -164,13 +192,13 @@ function createManufacturerGears(cb) {
 function createMotorcycles(cb) {
     async.series([
         function(callback) {
-          motorcycleCreate('Honda XR75', manufacturers[1], 'A vintage model that still packs a punch on tight city streets.', types[2], callback);
+          motorcycleCreate('Honda XR75', manufacturers[1], 'A vintage model that still packs a punch on tight city streets.', types[2], users[0], callback);
         },
         function(callback) {
-          motorcycleCreate('Sportster 1200', manufacturers[0], 'A classic cruiser for smooth riding.', types[0], callback);
+          motorcycleCreate('Sportster 1200', manufacturers[0], 'A classic cruiser for smooth riding.', types[0], users[0], callback);
         },
 	function(callback) {
-          motorcycleCreate('Diavel 1200', manufacturers[2], 'A fast bike for a speedy ride.', types[1], callback);
+          motorcycleCreate('Diavel 1200', manufacturers[2], 'A fast bike for a speedy ride.', types[1], users[0], callback);
         },
         ],
         // optional callback
@@ -207,6 +235,7 @@ function createBrands(cb) {
 }
 
 async.series([
+    createUsers,
     createBrands,
     createGearTypes,
     createTypes,
