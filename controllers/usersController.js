@@ -69,10 +69,12 @@ exports.user_signup_post = function (req, res, next){
         return next(err);
       }
       else {
+        const userCart = Cart.findOne().sort({_id: -1}).limit(1)
+
         const user = new User({
           username: req.body.username,
           password: hashedPassword,
-          cart: cart
+          cart: userCart
         }).save(err => {
           if (err) { 
             return next(err);
