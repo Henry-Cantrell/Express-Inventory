@@ -4,6 +4,7 @@ block content
   h1= title
 
   form(method='POST' action='/inventory/gear/create')
+  input(type='hidden' name='listing_user' value=currentUser.id)
     div.form-group
       label(for='gear_name') Gear name:
       input#gear_name.form-control(type='text', placeholder='Gear name' name='gear_name' required='true' value=(undefined===gear ? '' : gear.gear_name) )

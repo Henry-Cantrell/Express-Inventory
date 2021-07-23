@@ -11,7 +11,7 @@ exports.gear_list = function(req, res, next) {
     .exec(function (err, gear_list) {
       if (err) { return next(err); }
       //Successful, so render
-      res.render('gear_list', { title: 'Motorcycle Gear', gear_list: gear_list });
+      res.render('gear_list', { title: 'Motorcycle Gear', gear_list: gear_list, listing_creator: listing_creator });
     });
 };
 
@@ -25,6 +25,7 @@ exports.gear_detail = function(req, res, next) {
         Gear.findById(req.params.id)
           .populate('brand')
           .populate('gear_type')
+          .populate('listing_creator')
           .exec(callback);
     },
 
@@ -68,6 +69,7 @@ exports.gear_create_post =  [
   body('summary', 'summary required').trim().isLength({ min: 1 }).escape(),
   body('brand', 'brand required').trim().isLength({ min: 1 }).escape(),
   body('gear_type', 'gear_type required').trim().isLength({ min: 1 }).escape(),
+  body('listing_creator', 'User must not be empty').trim().isLength({ min: 1 }).escape(),
 
   // Process request after validation and sanitization.
   (req, res, next) => {
@@ -80,7 +82,8 @@ exports.gear_create_post =  [
       { gear_name: req.body.gear_name,
         summary: req.body.summary,
         brand: req.body.brand,
-        gear_type: req.body.gear_type
+        gear_type: req.body.gear_type,
+        listing_creator: req.body.listing_creator
       }
     );
 
