@@ -7,8 +7,8 @@ var Schema = mongoose.Schema;
 
 var CartSchema = new Schema (
 {
-   motorcycles: {[type: ObjectID, ref: 'Motorcycle']},
-   gears: {[type: ObjectID, ref: 'Gear']}
+   motorcycles: [{type: Schema.ObjectId, ref: 'Motorcycle'}],
+   gears: [{type: Schema.ObjectId, ref: 'Gear'}]
 }
 );
 
