@@ -51,14 +51,28 @@ exports.user_signup_get = function (req, res) {
 
 exports.user_signup_post = function (req, res, next){ 
 
-    bcrypt.hash(req.body.password, 10, (err, hashedPassword) => {
+  async.series([
+
+    function(){const cart = new Cart({
+      motorcycles: [],
+      gears: []
+    }).save(err => {
+      if (err) {
+       return next(err);
+      }
+    }
+    );
+  },
+
+   function() {bcrypt.hash(req.body.password, 10, (err, hashedPassword) => {
       if (err) {
         return next(err);
       }
       else {
         const user = new User({
           username: req.body.username,
-          password: hashedPassword
+          password: hashedPassword,
+          cart: cart
         }).save(err => {
           if (err) { 
             return next(err);
@@ -66,6 +80,9 @@ exports.user_signup_post = function (req, res, next){
           res.redirect("/users/login");
         });
       }
-    });
+    })
+  }
+  ])
+    
   };
   

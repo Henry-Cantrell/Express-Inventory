@@ -104,11 +104,14 @@ app.get("/users/logout", (req, res) => {
 
 app.post(
   "/users/login",
+  
   passport.authenticate("local", {
     successRedirect: "/",
     failureRedirect: ""
   })
 );
+
+
 
 // Makes user obj globally visible in app, must be before view eng setup methods and after passport init
 
