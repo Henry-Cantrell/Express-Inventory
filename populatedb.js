@@ -27,8 +27,8 @@ var manufacturers = []
 var users = []
 var carts = []
 
-function cartCreate(username, password, cb) {
-  cartdetail = {user: user}
+function cartCreate(motorcycles, gears, cb) {
+  cartdetail = {motorcycles: motorcycles, gear: gears}
 
   var cart = new Cart(cartdetail);
 
@@ -43,7 +43,7 @@ function cartCreate(username, password, cb) {
   }  );
 }
 
-function userCreate(username, password, cb) {
+function userCreate(username, password, cart, cb) {
   userdetail = {username: username, password: password, cart: cart}
 
   var user = new User(userdetail);
@@ -159,7 +159,7 @@ function brandCreate(brand_name, cb) {
 function createUsers(cb) {
  async.series([
   function(callback) {
-    userCreate("testUser", "abc", callback);
+    userCreate("testUser", "abc", carts[0], callback);
   }
  ],
  cb);
@@ -169,7 +169,7 @@ function createUsers(cb) {
 function createCarts(cb) {
  async.series([
   function(callback) {
-    cartCreate(users[0], callback);
+    cartCreate(motorcycles[Motorcycle], gears[Gear], callback);
   }
  ],
  cb);
@@ -263,6 +263,7 @@ function createBrands(cb) {
 }
 
 async.series([
+    createCarts,
     createUsers,
     createBrands,
     createGearTypes,

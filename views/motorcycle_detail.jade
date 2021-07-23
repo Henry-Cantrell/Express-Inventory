@@ -8,10 +8,9 @@ block content
   p #[strong Summary:] #{motorcycle.summary}
   p #[strong Type:] #{motorcycle.type.name}
   p #[strong Seller:] #{motorcycle.listing_creator.username}
+if(currentUser)
+  a(href='' class="btn btn-secondary") Add to cart
 
-  hr
-  //p
-    //a(href=book.url+'/delete') Delete Book
   p
     a(href=motorcycle.url+'/update') Update Motorcycle
 
