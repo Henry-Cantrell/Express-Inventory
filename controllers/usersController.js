@@ -16,6 +16,39 @@ exports.user_cart_get = function (req, res) {
      res.render("cart_show")
 };
 
+// Show cart contents on GET
+
+exports.user_cart_get = function(req,res,next){
+
+  async.parallel({
+      user: function(callback) {
+          User.where({cart: req.params.cart})
+           .populate('cart')
+           .exec(callback);
+      },
+
+  }, function(err, results) {
+      if (err) { return next(err); }
+      if (results.cart==null) { // No results.
+          var err = new Error('cart not found');
+          err.status = 404;
+          return next(err);
+      }
+      // Successful, so render
+      res.render('cart_show', { title: 'Cart', user: results.user} );
+  })
+};
+
+// Add cart contents on POST
+
+ exports.user_cart_update_post = function(req,res,next){
+
+  cart = Cart.findById(req.params.cart_id)
+ };
+
+  // for each item in motorcycle and gear array
+  // push into motorcycle and gear array within cart
+
 // Login get method
 // Note: login controller logic moved to app.js due to middleware bugs
 

@@ -8,8 +8,8 @@ block content
   p #[strong Summary:] #{motorcycle.summary}
   p #[strong Type:] #{motorcycle.type.name}
   p #[strong Seller:] #{motorcycle.listing_creator.username}
-if(currentUser)
-  a(href='' class="btn btn-secondary") Add to cart
+  if(currentUser)
+   a(href='users/cart/update' class="btn btn-secondary" style='margin-bottom:40px') Add to cart
 
   p
     a(href=motorcycle.url+'/update') Update Motorcycle

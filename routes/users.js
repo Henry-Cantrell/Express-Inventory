@@ -2,22 +2,25 @@ var express = require('express');
 var router = express.Router();
 var users_controller = require('../controllers/usersController')
 
-// Router res to restful gets 
-
 // Note: login controller logic moved to app.js due to middleware bugs
 
 //router.get("/login", users_controller.user_login_get);
 
-router.get("/signup", users_controller.user_signup_get);
+// Cart restful methods
+
 router.get("/cart", users_controller.user_cart_get);
+router.post("/cart/update", users_controller.user_cart_update_post)
 
 ////router.get("/logout", users_controller.user_logout_get)
-
-// Router res to restful posts 
 
 // Note: login controller logic moved to app.js due to middleware bugs
 
 //router.post('/login', users_controller.user_login_post);
+
+// Signup restful methods
+
+router.get("/signup", users_controller.user_signup_get);
 router.post('/signup', users_controller.user_signup_post);
+
 
 module.exports = router;
