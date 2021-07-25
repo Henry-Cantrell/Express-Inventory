@@ -13,7 +13,7 @@ html(lang='en')
   body
     nav.navbar.navbar-expand-lg.navbar-dark.bg-dark.fixed-top
      .container-fluid
-      a.navbar-brand(href='/' style='margin-left:35px') Motorcycles and accessories
+      a.navbar-brand(href='/' style='margin-left:35px') Motorcycles and Accessories
      if(currentUser)
       .dropdown
        button#dropdownMenuButton.btn.btn-secondary.dropdown-toggle(type='button' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false')
@@ -22,7 +22,7 @@ html(lang='en')
         a.dropdown-item(href='/inventory/motorcycle/create') List Motorcycle
         a.dropdown-item(href='/inventory/gear/create') List Gear
       a.navbar-brand(href='/users/cart' method='GET' style='margin-left:35px') Cart
-      a.navbar-brand(href='' style='margin-left:35px') Profile
+      a.navbar-brand(href='' style='margin-left:35px') Mail
       a.navbar-brand(href='/users/logout' method='GET' style='margin-left:35px') Logout
      if(!currentUser)
       a.navbar-brand(href='/users/login' method='GET' style='margin-left:35px') Login
