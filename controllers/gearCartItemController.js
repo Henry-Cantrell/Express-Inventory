@@ -1,21 +1,21 @@
-var motorcycleCartItem = require('../models/motorcycle_cart_item');
+var gearCartItem = require('../models/gear_cart_item');
 var User = require('../models/user');
 var async = require('async');
 const { body,validationResult } = require("express-validator");
 
-// Display list of all motorcycleCartItem.
-exports.motorcycleCartItem_list = function(req, res, next) {
+// Display list of all gearCartItem.
+exports.gearCartItem_list = function(req, res, next) {
 
-  MotorcycleCartItem.find()
-    .exec(function (err, motorcycleCartItem_list) {
+  GearCartItem.find()
+    .exec(function (err, gearCartItem_list) {
       if (err) { return next(err); }
       //Successful, so render
-      res.render('motorcycleCartItem_list', { title: 'Types of Motorcycle Gear', motorcycleCartItem_list: motorcycleCartItem_list });
+      res.render('gearCartItem_list', { title: 'Types of Motorcycle Gear', gearCartItem_list: gearCartItem_list });
     });
 };
 
-// Handle motorcycleCartItem create on POST.
-exports.motorcycleCartItem_create_post =  [
+// Handle gearCartItem create on POST.
+exports.gearCartItem_create_post =  [
 
   // Validate and sanitize the name field.
   body('user', 'user required').trim().isLength({ min: 1 }).escape(),
@@ -27,8 +27,8 @@ exports.motorcycleCartItem_create_post =  [
     // Extract the validation errors from a request.
     const errors = validationResult(req);
 
-    // Create a motorcycleCartItem object with escaped and trimmed data.
-    var motorcycleCartItem= new MotorcycleCartItem(
+    // Create a gearCartItem object with escaped and trimmed data.
+    var gearCartItem= new GearCartItem(
       { motorcycle: req.body.motorcycle,
         user: req.body.user
       }
@@ -40,9 +40,9 @@ exports.motorcycleCartItem_create_post =  [
       return;
     }
     else {
-             motorcycleCartItem.save(function (err) {
+             gearCartItem.save(function (err) {
                if (err) { return next(err); }
-               // motorcycleCartItem saved. Redirect to home page.
+               // gearCartItem saved. Redirect to home page.
                res.redirect('/');
              })
     }
