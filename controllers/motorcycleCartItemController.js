@@ -1,5 +1,4 @@
-var motorcycleCartItem = require('../models/motorcycle_cart_item');
-var User = require('../models/user');
+var MotorcycleCartItem = require('../models/motorcycle_cart_item');
 var async = require('async');
 const { body,validationResult } = require("express-validator");
 

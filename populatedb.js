@@ -10,8 +10,8 @@ var Brand = require('./models/brand');
 var Gear = require('./models/gear');
 var Manufacturer = require('./models/manufacturer');
 var User = require('./models/user');
-//var MotorcycleCartItems = require('./models/motorcycle_cart_items');
-//var GearCartItems = require('./models/gear_cart_items')
+//var MotorcycleCartItems = require('./models/motorcycle_cart_item');
+//var GearCartItems = require('./models/gear_cart_item')
 
 var mongoose = require('mongoose');
 var mongoDB ="mongodb+srv://Henry:FaL6jJrxQsSSi2V@cluster0.abwln.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";
@@ -25,6 +25,7 @@ var types = []
 var gear_types = []
 var brands = []
 var manufacturers = []
+var users = []
 // var motorcycleCartItems = []
 // var gearCartItems = []
 

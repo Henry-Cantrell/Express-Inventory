@@ -54,7 +54,6 @@ exports.user_signup_post = function (req, res, next){
       const user = new User({
         username: req.body.username,
         password: hashedPassword,
-        cart: userCart
       }).save(err => {
         if (err) { 
           return next(err);
