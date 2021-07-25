@@ -34,8 +34,7 @@ exports.gearCartItem_create_post =  [
     );
 
     if (!errors.isEmpty()) {
-      // There are errors. Render the form again with sanitized values/error messages.
-      res.redirect('');
+      res.redirect('/');
       return;
     }
     else {
