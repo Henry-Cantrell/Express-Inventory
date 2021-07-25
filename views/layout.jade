@@ -13,8 +13,13 @@ html(lang='en')
      .container-fluid
       a.navbar-brand(href='/' style='margin-left:35px') Motorcycles and accessories
      if(currentUser)
+      .dropdown
+       button#dropdownMenuButton.btn.btn-secondary.dropdown-toggle(type='button' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false')
+        | Manage listings
+       .dropdown-menu(aria-labelledby='dropdownMenuButton')
+        a.dropdown-item(href='/inventory/motorcycle/create') List Motorcycle
+        a.dropdown-item(href='/inventory/gear/create') List Gear
       a.navbar-brand(href='/users/cart' method='GET' style='margin-left:35px') Cart
-      a.navbar-brand(href='' style='margin-left:35px') Manage Listings
       a.navbar-brand(href='' style='margin-left:35px') Profile
       a.navbar-brand(href='/users/logout' method='GET' style='margin-left:35px') Logout
      if(!currentUser)
@@ -44,20 +49,6 @@ html(lang='en')
                 input(type="submit" value="Brands" class="btn btn-secondary btn-block")
               li(class='list-group-item')
                 hr
-            if(currentUser)
-              li(class='list-group-item')
-               form(action="/inventory/motorcycle/create") 
-                input(type="submit" value="List Motorcycle" class="btn btn-secondary btn-block")
-              li(class='list-group-item')
-                form(action="/inventory/manufacturer/create") 
-                 input(type="submit" value="List Manufacturer" class="btn btn-secondary btn-block")
-              li(class='list-group-item')
-                form(action="/inventory/gear/create")
-                 input(type="submit" value="List Gear" class="btn btn-secondary btn-block")
-              li(class='list-group-item')
-               form(action="/inventory/brand/create")
-                input(type="submit" value="List Brand" class="btn btn-secondary btn-block")
-
         div(class='col-sm-10')
           block content
    
