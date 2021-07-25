@@ -2,15 +2,16 @@
 
 console.log('This script populates some motorcycle-related items to your database. Specified database as argument - e.g.: populatedb mongodb+srv://cooluser:coolpassword@cluster0.a9azn.mongodb.net/local_library?retryWrites=true');
 
-var async = require('async')
-var Motorcycle = require('./models/motorcycle')
-var Type = require('./models/type')
-var GearType = require('./models/gear_type')
-var Brand = require('./models/brand')
-var Gear = require('./models/gear')
-var Manufacturer = require('./models/manufacturer')
-var User = require('./models/user')
-var Cart = require('./models/cart');
+var async = require('async');
+var Motorcycle = require('./models/motorcycle');
+var Type = require('./models/type');
+var GearType = require('./models/gear_type');
+var Brand = require('./models/brand');
+var Gear = require('./models/gear');
+var Manufacturer = require('./models/manufacturer');
+var User = require('./models/user');
+//var MotorcycleCartItems = require('./models/motorcycle_cart_items');
+//var GearCartItems = require('./models/gear_cart_items')
 
 var mongoose = require('mongoose');
 var mongoDB ="mongodb+srv://Henry:FaL6jJrxQsSSi2V@cluster0.abwln.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";
@@ -24,27 +25,11 @@ var types = []
 var gear_types = []
 var brands = []
 var manufacturers = []
-var users = []
-var carts = []
+// var motorcycleCartItems = []
+// var gearCartItems = []
 
-function cartCreate(motorcycles, gears, cb) {
-  cartdetail = {motorcycles: motorcycles, gear: gears}
-
-  var cart = new Cart(cartdetail);
-
-  cart.save(function (err) {
-    if (err) {
-      cb(err, null)
-      return
-    }
-    console.log('New Cart: ' + cart);
-    carts.push(cart)
-    cb(null, cart)
-  }  );
-}
-
-function userCreate(username, password, cart, cb) {
-  userdetail = {username: username, password: password, cart: cart}
+function userCreate(username, password, cb) {
+  userdetail = {username: username, password: password}
 
   var user = new User(userdetail);
 
@@ -159,17 +144,7 @@ function brandCreate(brand_name, cb) {
 function createUsers(cb) {
  async.series([
   function(callback) {
-    userCreate("testUser", "abc", carts[0], callback);
-  }
- ],
- cb);
-
-}
-
-function createCarts(cb) {
- async.series([
-  function(callback) {
-    cartCreate(motorcycles[Motorcycle], gears[Gear], callback);
+    userCreate("testUser", "abc", callback);
   }
  ],
  cb);
@@ -263,7 +238,6 @@ function createBrands(cb) {
 }
 
 async.series([
-    createCarts,
     createUsers,
     createBrands,
     createGearTypes,

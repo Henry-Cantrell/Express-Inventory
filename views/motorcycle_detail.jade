@@ -10,8 +10,12 @@ block content
   p #[strong Seller:] #{motorcycle.listing_creator.username}
   if(currentUser)
    a(href='users/cart/update' class="btn btn-secondary" style='margin-bottom:40px') Add to cart
+  else 
+   p #[strong Please login to purchase this item]
 
   p
     a(href=motorcycle.url+'/update') Update Motorcycle
+
+  // There should probably be a form to submit Motorcycle obj to controller for cart additions
 
     
