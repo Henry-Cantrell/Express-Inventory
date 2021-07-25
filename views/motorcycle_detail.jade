@@ -9,7 +9,10 @@ block content
   p #[strong Type:] #{motorcycle.type.name}
   p #[strong Seller:] #{motorcycle.listing_creator.username}
   if(currentUser)
-   a(href='users/cart/update' class="btn btn-secondary" style='margin-bottom:40px') Add to cart
+   form(method= 'POST', action='/cart/motorcycle/add')
+    input(type= "hidden", value = motorcycle._id, name = 'motorcycle')
+    input(type= "hidden", value = currentUser._id, name='user')
+    button.btn.btn-secondary(type= 'submit') Add to cart
   else 
    p #[strong Please login to purchase this item]
 
