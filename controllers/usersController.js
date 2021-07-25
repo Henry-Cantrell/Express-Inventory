@@ -7,7 +7,6 @@ const bcrypt = require('bcryptjs');
 var async = require('async');
 const { body,validationResult } = require("express-validator");
 const User = require('../models/user'); 
-const Cart = require('../models/cart');
 
   // for each item in motorcycle and gear array
   // push into motorcycle and gear array within cart

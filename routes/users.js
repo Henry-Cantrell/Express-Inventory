@@ -6,11 +6,6 @@ var users_controller = require('../controllers/usersController')
 
 //router.get("/login", users_controller.user_login_get);
 
-// Cart restful methods
-
-router.get("/cart", users_controller.user_cart_get);
-router.post("/cart/update", users_controller.user_cart_update_post)
-
 ////router.get("/logout", users_controller.user_logout_get)
 
 // Note: login controller logic moved to app.js due to middleware bugs
