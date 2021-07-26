@@ -11,12 +11,10 @@ exports.cart_show = function (req, res, next) {
       async.parallel({
 
       user: function(callback) {
-
-        const userFromSession = req.session.currentUser._id
             
         User.findById(req.params.id)
-          //.populate('gear_cart_item')
-          //.populate('motorcycle_cart_item')
+          .populate('gear_cart_item')
+          .populate('motorcycle_cart_item')
           .exec(callback);
     },
 

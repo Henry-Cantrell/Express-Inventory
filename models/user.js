@@ -11,7 +11,7 @@ var UserSchema = new Schema(
 // Virtual for user's cart URL
 
 UserSchema
-.virtual('cart-url')
+.virtual('url')
 .get(function () {
   return '/cart/show/' + this._id;
 });
