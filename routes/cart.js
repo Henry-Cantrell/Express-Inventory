@@ -5,6 +5,11 @@ var router = express.Router();
 
 var gear_cart_item_controller = require('../controllers/gearCartItemController');
 var motorcycle_cart_item_controller = require('../controllers/motorcycleCartItemController');
+var cart_controller = require('../controllers/cartController');
+
+// Handle cart display
+
+router.get("/show", cart_controller.cart_show);
 
 // Handle posts for motorcycle and gear item creations
 

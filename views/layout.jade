@@ -23,7 +23,7 @@ html(lang='en')
         a.dropdown-item(href='/inventory/motorcycle/create') List Motorcycle
         a.dropdown-item(href='/inventory/gear/create') List Gear
         a.dropdown-item(href='') Update Listings
-      a.navbar-brand(href='/users/cart' method='GET' style='margin-left:35px') Cart
+      a.navbar-brand(href='/cart/show' method='GET' style='margin-left:35px') Cart
       a.navbar-brand(href='' style='margin-left:35px') Mail
       a.navbar-brand(href='/users/logout' method='GET' style='margin-left:35px') Logout
      if(!currentUser)
@@ -46,7 +46,7 @@ html(lang='en')
                div(style = 'margin-bottom:25px')
                form(action="/inventory/gear") 
                 button.btn.btn-light.btn-circle.btn-xl(type='submit' title='Gear') 
-                 i(class="fas fa-tshirt" aria-hidden="true")
+                 i(class = 'fas fa-tshirt' aria-hidden="true")
                div(style = 'margin-bottom:25px')
                form(action="/inventory/manufacturers")
                 button.btn.btn-light.btn-circle.btn-xl(type='submit' title='Motorcycle Manufacturers') 
