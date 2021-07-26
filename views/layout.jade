@@ -17,14 +17,16 @@ html(lang='en')
       a.navbar-brand(href='/' style='margin-left:35px') Motorcycles and Accessories
      if(currentUser)
       .dropdown
-       button#dropdownMenuButton.btn.btn-secondary.dropdown-toggle(type='button' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false')
+       button#dropdownMenuButton.btn.btn-secondary.dropdown-toggle(style='margin-right:35px' type='button' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false')
         | Manage Listings
        .dropdown-menu(aria-labelledby='dropdownMenuButton')
         a.dropdown-item(href='/inventory/motorcycle/create') List Motorcycle
         a.dropdown-item(href='/inventory/gear/create') List Gear
         a.dropdown-item(href='/users/listings') Update Listings
-      a.navbar-brand(href='/cart/show' method='GET' style='margin-left:35px') Cart
-      a.navbar-brand(href='' style='margin-left:35px') Mail
+      a.navbar-brand(href='' style='margin-right:35px') Mail
+      form(action='/cart/show')
+        input(type='hidden' value=currentUser._id)
+      a.navbar-brand(href='/cart/show' onclick="document.getElementById('cart-form').submit()") Cart 
       a.navbar-brand(href='/users/logout' method='GET' style='margin-left:35px') Logout
      if(!currentUser)
       a.navbar-brand(href='/users/login' method='GET' style='margin-left:35px') Login
