@@ -4,6 +4,8 @@ var Type = require('../models/type');
 var async = require('async');
 const { body,validationResult } = require("express-validator");
 
+// This index counting method is defunct. However, it is kept as a reference for cart item counts later on.
+
 exports.index = function(req, res) {
 
   async.parallel({
@@ -22,6 +24,7 @@ exports.index = function(req, res) {
 };
 
 // Display list of all motorcycle.
+
 exports.motorcycle_list = function(req, res, next) {
 
   Motorcycle.find()
@@ -34,6 +37,7 @@ exports.motorcycle_list = function(req, res, next) {
 };
 
 // Display detail page for a specific motorcycle.
+
 exports.motorcycle_detail = function(req, res, next) {
 
     async.parallel({
@@ -60,6 +64,7 @@ exports.motorcycle_detail = function(req, res, next) {
 
 
 // Display motorcycle create form on GET.
+
 exports.motorcycle_create_get = function(req, res, next) {
 
   //Retrieve all manufacturers and motorcycle types
@@ -78,6 +83,7 @@ exports.motorcycle_create_get = function(req, res, next) {
   };
   
 // Handle motorcycle create on POST.
+
 exports.motorcycle_create_post = [
 
   // Validate and sanitize fields.
@@ -86,6 +92,7 @@ exports.motorcycle_create_post = [
   body('summary', 'Summary must not be empty.').trim().isLength({ min: 1 }).escape(),
   body('type', 'Type must not be empty').trim().isLength({ min: 1 }).escape(),
   body('listing_creator', 'User must not be empty').trim().isLength({ min: 1 }).escape(),
+  body('count', 'Must not be zero').trim().isLength({min: 1}).escape(),
   // Process request after validation and sanitization.
   (req, res, next) => {
 
@@ -98,7 +105,8 @@ exports.motorcycle_create_post = [
           manufacturer: req.body.manufacturer,
           summary: req.body.summary,
           type: req.body.type,
-          listing_creator: req.body.listing_creator
+          listing_creator: req.body.listing_creator,
+          count: count
          });
 
       if (!errors.isEmpty()) {
@@ -131,16 +139,19 @@ exports.motorcycle_create_post = [
 ];
 
 // Display motorcycle delete form on GET.
+
 exports.motorcycle_delete_get = function(req, res) {
     res.send('NOT IMPLEMENTED: motorcycle delete GET');
 };
 
 // Handle motorcycle delete on POST.
+
 exports.motorcycle_delete_post = function(req, res) {
     res.send('NOT IMPLEMENTED: motorcycle delete POST');
 };
 
 // Display motorcycle update form on GET.
+
 exports.motorcycle_update_get = function(req, res, next) {
 
     // Get motorcycle, manufacturers and types for form.
@@ -170,6 +181,7 @@ exports.motorcycle_update_get = function(req, res, next) {
 
 
 // Handle motorcycle update on POST.
+
 exports.motorcycle_update_post = [
    
     // Validate and sanitize fields.

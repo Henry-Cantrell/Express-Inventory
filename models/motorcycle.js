@@ -9,6 +9,7 @@ var MotorcycleSchema = new Schema(
     summary: {type: String, required: true},
     type: {type: Schema.ObjectId, ref: 'Type', required: true },
     listing_creator: {type: Schema.ObjectId, ref: 'User', required: true},
+    count: {type: Number, required: true}
   }
 );
 

@@ -8,6 +8,8 @@ block content
   p #[strong Summary:] #{gear.summary}
   p #[strong Type:]  #{gear.gear_type.name}
   p #[strong Seller:] #{gear.listing_creator.username}
+  p #[strong Stocked:] #{gear.count}
+
   if(currentUser)
    form(method= 'POST', action='/cart/gear/add')
     input(type= "hidden", value = gear._id, name = 'gear')

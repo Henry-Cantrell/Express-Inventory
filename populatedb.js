@@ -61,8 +61,8 @@ function manufacturerCreate(manufacturer_name, country, cb) {
   }  );
 }
 
-function gearCreate(gear_name, brand, summary, gear_type, listing_creator, cb) {
-  geardetail = {gear_name: gear_name, brand: brand, summary: summary, gear_type: gear_type, listing_creator: listing_creator}
+function gearCreate(gear_name, brand, summary, gear_type, listing_creator, count, cb) {
+  geardetail = {gear_name: gear_name, brand: brand, summary: summary, gear_type: gear_type, listing_creator: listing_creator, count: count}
   
   var gear = new Gear(geardetail);
        
@@ -105,13 +105,14 @@ function gearTypeCreate(name, cb) {
   }   );
 }
 
-function motorcycleCreate(model, manufacturer, summary, type, listing_creator, cb) {
+function motorcycleCreate(model, manufacturer, summary, type, listing_creator, count, cb) {
   motorcycledetail = { 
     model: model,
     manufacturer: manufacturer,
     summary: summary,
     type: type,
-    listing_creator: listing_creator
+    listing_creator: listing_creator,
+    count: count,
   }
   if (type != false) motorcycledetail.type = type
     
@@ -180,13 +181,13 @@ function createManufacturerGears(cb) {
           manufacturerCreate('Ducati', 'Italy', callback);
         },
        function(callback) {
-          gearCreate('Schuberth C4', brands[0], 'A full-face motorcycle helmet for speedy rides.', gear_types[0], users[0], callback);
+          gearCreate('Schuberth C4', brands[0], 'A full-face motorcycle helmet for speedy rides.', gear_types[0], users[0], 5, callback);
         },
         function(callback) {
-          gearCreate('Dainese Super Rider', brands[1], 'A padded jacket for rough riding.', gear_types[1], users[0], callback);
+          gearCreate('Dainese Super Rider', brands[1], 'A padded jacket for rough riding.', gear_types[1], users[0], 6, callback);
         },
         function(callback) {
-          gearCreate('X-0 Armored Leggings', brands[0], 'Armored pants for emergency sliding.', gear_types[2], users[0], callback);
+          gearCreate('X-0 Armored Leggings', brands[0], 'Armored pants for emergency sliding.', gear_types[2], users[0], 7, callback);
         },
         ],
         // optional callback
@@ -196,13 +197,13 @@ function createManufacturerGears(cb) {
 function createMotorcycles(cb) {
     async.series([
         function(callback) {
-          motorcycleCreate('Honda XR75', manufacturers[1], 'A vintage model that still packs a punch on tight city streets.', types[2], users[0], callback);
+          motorcycleCreate('Honda XR75', manufacturers[1], 'A vintage model that still packs a punch on tight city streets.', types[2], users[0], 7, callback);
         },
         function(callback) {
-          motorcycleCreate('Sportster 1200', manufacturers[0], 'A classic cruiser for smooth riding.', types[0], users[0], callback);
+          motorcycleCreate('Sportster 1200', manufacturers[0], 'A classic cruiser for smooth riding.', types[0], users[0], 8, callback);
         },
 	function(callback) {
-          motorcycleCreate('Diavel 1200', manufacturers[2], 'A fast bike for a speedy ride.', types[1], users[0], callback);
+          motorcycleCreate('Diavel 1200', manufacturers[2], 'A fast bike for a speedy ride.', types[1], users[0], 9, callback);
         },
         ],
         // optional callback
