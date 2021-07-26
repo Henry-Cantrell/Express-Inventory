@@ -9,7 +9,7 @@ var cart_controller = require('../controllers/cartController');
 
 // Handle cart display
 
-router.get("/show", cart_controller.cart_show);
+router.get("/show/:id", cart_controller.cart_show);
 
 // Handle posts for motorcycle and gear item creations
 
