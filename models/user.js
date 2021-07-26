@@ -8,13 +8,5 @@ var UserSchema = new Schema(
   }
 );
 
-// Virtual for user's cart URL
-
-UserSchema
-.virtual('url')
-.get(function () {
-  return '/cart/show/' + this._id;
-});
-
 //Export model
 module.exports = mongoose.model('User', UserSchema);

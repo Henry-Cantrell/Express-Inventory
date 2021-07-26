@@ -24,7 +24,7 @@ html(lang='en')
         a.dropdown-item(href='/inventory/gear/create') List Gear
         a.dropdown-item(href='/users/listings') Update Listings
       a.navbar-brand(href='' style='margin-right:35px') Mail
-      a.navbar-brand(href=currentUser.url) Cart
+      a.navbar-brand(href='/cart/show/' + currentUser._id) Cart
       a.navbar-brand(href='/users/logout' method='GET' style='margin-left:35px') Logout
      if(!currentUser)
       a.navbar-brand(href='/users/login' method='GET' style='margin-left:35px') Login
