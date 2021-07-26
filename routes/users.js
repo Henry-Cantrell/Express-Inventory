@@ -17,5 +17,9 @@ var users_controller = require('../controllers/usersController')
 router.get("/signup", users_controller.user_signup_get);
 router.post('/signup', users_controller.user_signup_post);
 
+// Listings restful methods
+
+router.get("/listings", users_controller.user_listings_get);
+
 
 module.exports = router;

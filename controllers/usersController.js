@@ -36,6 +36,12 @@ const User = require('../models/user');
 //  })
 //)};
 
+// Listings get method
+
+exports.user_listings_get = function (req, res) {
+res.render("user_listings");
+}
+
 // Signup get method
 
 exports.user_signup_get = function (req, res) { 
