@@ -45,7 +45,7 @@ client.connect(err => {
 // Mongoose connection 
 
 //Set up mongoose connection
-var mongoDB =`mongodb+srv://Henry:${process.env.DB_PASSWORD}@cluster0.abwln.mongodb.net/myFirstDatabase?retryWrites=true&w=majority`;
+var mongoDB =`mongodb+srv://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@cluster0.abwln.mongodb.net/myFirstDatabase?retryWrites=true&w=majority`;
 mongoose.connect(mongoDB, { useNewUrlParser: true , useUnifiedTopology: true});
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'MongoDB connection error:'));

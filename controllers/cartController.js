@@ -36,3 +36,5 @@ exports.cart_show = function (req, res, next) {
         res.render('cart_show', { title: 'Cart Items:', user: results.user, motorcycle_cart_items: results.user_motorcycle_cart_items, gear_cart_items: results.user_gear_cart_items } );
     });
 }
+
+// Find items then populate?

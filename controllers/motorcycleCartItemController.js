@@ -41,7 +41,7 @@ exports.motorcycleCartItem_create_post =  [
       return;
     }
     else {
-      // Push motorcycle cart item into user array
+      // Save item, then push item into user array
           async.parallel({
 
             function () {
