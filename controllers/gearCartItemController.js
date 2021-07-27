@@ -19,7 +19,7 @@ exports.gearCartItem_create_post =  [
 
   // Validate and sanitize the name field.
   body('user', 'user required').trim().isLength({ min: 1 }).escape(),
-  body('gear', 'user required').trim().isLength({ min: 1 }).escape(),
+  body('gear', 'gear required').trim().isLength({ min: 1 }).escape(),
 
   // Process request after validation and sanitization.
   (req, res, next) => {

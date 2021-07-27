@@ -5,7 +5,15 @@ block content
 
  dl
       each motorcycle_item in motorcycle_cart_items
+        p one
         dt
           a(href='/inventory/motorcycle/' + motorcycle_item.motorcycle._id) #{motorcycle_item.motorcycle.model}
         dd #{motorcycle_item.motorcycle.summary}
+
+  dl
+      each gear_item in gear_cart_items
+        p one
+        dt
+          a(href='/inventory/motorcycle/' + gear_item.gear._id) #{gear_item.motorcycle.gear_name}
+        dd #{gear_item.gear.summary}
  
