@@ -46,9 +46,10 @@ exports.gearCartItem_create_post =  [
             if (err) { 
               return next(err); 
             } else {
-            next();
+            res.redirect('/');
             }
-          })         
+          })
+      
     }
   }
 ];
