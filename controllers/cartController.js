@@ -1,5 +1,5 @@
-var gear_cart_item = require('../models/gear_cart_item');
-var motorcycle_cart_item = require('../models/motorcycle_cart_item');
+var user_gear_cart_items = require('../models/gear_cart_item');
+var motorcycle_cart_items = require('../models/motorcycle_cart_item');
 var User = require('../models/user');
 var async = require('async');
 const { body,validationResult } = require("express-validator");
@@ -13,14 +13,19 @@ exports.cart_show = function (req, res, next) {
       user: function(callback) {
             
         User.findById(req.params.id)
-          .populate('gear_cart_items')
-          .populate('motorcycle_cart_items')
           .exec(callback);
     },
-
+      user_motorcycle_cart_items : function(callback) {
+          motorcycle_cart_items.find({'user' : req.params.id})
+          .exec(callback);
+      },
+      user_gear_cart_items: function(callback){
+          gear_cart_items.find({'user': req.params.id})
+          .exec(callback);
+      }
     }, function(err, results) {
         if (err) { 
-            return callback(err); 
+            return next(err); 
         }
         else if (results.user==null) { // No results.
             var err = new Error('user not found');
@@ -28,6 +33,6 @@ exports.cart_show = function (req, res, next) {
             return next(err);
         }
         // Successful, so render
-        res.render('cart_show', { title: 'Cart Items:', user: results.user } );
+        res.render('cart_show', { title: 'Cart Items:', user: results.user, motorcycle_cart_items: results.user_motorcycle_cart_items, gear_cart_items: results.user_gear_cart_items } );
     });
 }

@@ -4,7 +4,7 @@ block content
  h1(style='margin-top:110px') #{user.username}
 
  dl
-      each motorcycle_item in user.motorcycle_cart_items
+      each motorcycle_item in motorcycle_cart_items
         dt
           a(href='/inventory/motorcycle/' + motorcycle_item.motorcycle._id) #{motorcycle_item.motorcycle.model}
         dd #{motorcycle_item.motorcycle.summary}
