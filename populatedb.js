@@ -26,8 +26,8 @@ var gear_types = []
 var brands = []
 var manufacturers = []
 var users = []
-// var motorcycleCartItems = []
-// var gearCartItems = []
+var motorcycleCartItems = []
+var gearCartItems = []
 
 function userCreate(username, password, cb) {
   userdetail = {username: username, password: password}

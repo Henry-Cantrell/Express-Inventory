@@ -1,6 +1,7 @@
 var GearCartItem = require('../models/gear_cart_item');
 var async = require('async');
 const { body,validationResult } = require("express-validator");
+var User = require("../models/user");
 
 // Display list of all gearCartItem.
 exports.gearCartItem_list = function(req, res, next) {
@@ -34,15 +35,40 @@ exports.gearCartItem_create_post =  [
     );
 
     if (!errors.isEmpty()) {
-      res.redirect('/');
+      // There are errors. Render the form again with sanitized values/error messages.
+      res.redirect('');
       return;
     }
     else {
-             gearCartItem.save(function (err) {
-               if (err) { return next(err); }
-               // gearCartItem saved. Redirect to home page.
-               res.redirect('/');
-             })
+      // Save and push gear cart item into user array
+          async.parallel({
+
+            function () {
+              gearCartItem.save(function (err) {
+              if (err) { 
+                return next(err); 
+              } else {
+              next();
+              }
+            })
+          }, function () {
+            User.findOneAndUpdate(
+             {_id: req.body.user._id},
+             { $push: {gear_cart_items: gearCartItem} },
+             function (err) {
+               if (err) {
+                 console.log(err)
+               } else {
+                 res.redirect('/')
+               }
+             }
+            )
+              
+            
+          }
+
+          })
+             
     }
   }
 ];

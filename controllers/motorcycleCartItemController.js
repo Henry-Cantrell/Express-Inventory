@@ -1,6 +1,8 @@
 var MotorcycleCartItem = require('../models/motorcycle_cart_item');
 var async = require('async');
 const { body,validationResult } = require("express-validator");
+var User = require('../models/user');
+const motorcycle_cart_item = require('../models/motorcycle_cart_item');
 
 // Display list of all motorcycleCartItem.
 exports.motorcycleCartItem_list = function(req, res, next) {
@@ -39,17 +41,32 @@ exports.motorcycleCartItem_create_post =  [
       return;
     }
     else {
-
+      // Push motorcycle cart item into user array
           async.parallel({
 
             function () {
               motorcycleCartItem.save(function (err) {
-              if (err) { return next(err); }
+              if (err) { 
+                return next(err); 
+              } else {
               // motorcycleCartItem saved. Redirect to home page.
-              res.redirect('/');
+              next();
+              }
             })
           }, function () {
-            User.findByIdAndUpdate
+            User.findOneAndUpdate(
+             {_id: req.body.user._id},
+             { $push: {motorcycle_cart_items: motorcycleCartItem} },
+             function (err) {
+               if (err) {
+                 console.log(err)
+               } else {
+                 res.redirect('/')
+               }
+             }
+            )
+              
+            
           }
 
           })
