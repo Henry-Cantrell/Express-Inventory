@@ -15,6 +15,7 @@ exports.gearCartItem_list = function(req, res, next) {
 };
 
 // Handle gearCartItem create on POST.
+
 exports.gearCartItem_create_post =  [
 
   // Validate and sanitize the name field.
@@ -36,39 +37,18 @@ exports.gearCartItem_create_post =  [
 
     if (!errors.isEmpty()) {
       // There are errors. Render the form again with sanitized values/error messages.
-      res.redirect('');
+      res.redirect('/inventory/gear/' + req.body.gear._id);
       return;
     }
     else {
       // Save and push gear cart item into user array
-          async.parallel({
-
-            function () {
-              gearCartItem.save(function (err) {
-              if (err) { 
-                return next(err); 
-              } else {
-              next();
-              }
-            })
-          }, function () {
-            User.findOneAndUpdate(
-             {_id: req.body.user._id},
-             { $push: {gear_cart_items: gearCartItem} },
-             function (err) {
-               if (err) {
-                 console.log(err)
-               } else {
-                 res.redirect('/')
-               }
-             }
-            )
-              
-            
-          }
-
-          })
-             
+          gearCartItem.save(function (err) {
+            if (err) { 
+              return next(err); 
+            } else {
+            next();
+            }
+          })         
     }
   }
 ];
