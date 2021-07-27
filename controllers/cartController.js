@@ -1,5 +1,5 @@
-var user_gear_cart_items = require('../models/gear_cart_item');
-var motorcycle_cart_items = require('../models/motorcycle_cart_item');
+var GearCartItem = require('../models/gear_cart_item');
+var MotorcycleCartItem = require('../models/motorcycle_cart_item');
 var User = require('../models/user');
 var async = require('async');
 const { body,validationResult } = require("express-validator");
@@ -16,11 +16,11 @@ exports.cart_show = function (req, res, next) {
           .exec(callback);
     },
       user_motorcycle_cart_items : function(callback) {
-          motorcycle_cart_items.find({'user' : req.params.id})
+          MotorcycleCartItem.find({'user' : req.params.id})
           .exec(callback);
       },
       user_gear_cart_items: function(callback){
-          gear_cart_items.find({'user': req.params.id})
+          GearCartItem.find({'user': req.params.id})
           .exec(callback);
       }
     }, function(err, results) {
