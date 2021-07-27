@@ -39,11 +39,21 @@ exports.motorcycleCartItem_create_post =  [
       return;
     }
     else {
-             motorcycleCartItem.save(function (err) {
-               if (err) { return next(err); }
-               // motorcycleCartItem saved. Redirect to home page.
-               res.redirect('/');
-             })
+
+          async.parallel({
+
+            function () {
+              motorcycleCartItem.save(function (err) {
+              if (err) { return next(err); }
+              // motorcycleCartItem saved. Redirect to home page.
+              res.redirect('/');
+            })
+          }, function () {
+            User.findByIdAndUpdate
+          }
+
+          })
+             
     }
   }
 ];

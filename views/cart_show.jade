@@ -3,15 +3,15 @@ extends layout
 block content
  h1(style='margin-top:110px') #{user.username}
 
- //dl
- //     each motorcycle in motorcycle_cart
- //       dt
- //         a(href='/inventory/motorcycle/' + motorcycle.id) #{motorcycle.model}
- //       dd #{motorcycle.summary}
+ dl
+      each motorcycle_item in user.motorcycle_cart_items
+        dt
+          a(href='/inventory/motorcycle/' + motorcycle_item.motorcycle._id) #{motorcycle_item.motorcycle.model}
+        dd #{motorcycle_item.motorcycle.summary}
  //
  //   p
  //     form
- //	  input(type='hidden' name='item' value=motorcycle.id)
+ //	  input(type='hidden' name='item' value=motorcycle_cart_item.id)
  //       input(type='submit' value='Purchase')
  //dl
  //     each gear in gear_cart

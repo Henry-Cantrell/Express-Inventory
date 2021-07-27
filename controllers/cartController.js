@@ -1,5 +1,5 @@
-var gear_cart_item = require('../models/gear_cart_item');
-var motorcycle_cart_item = require('../models/motorcycle_cart_item');
+//var gear_cart_items = require('../models/gear_cart_item');
+//var motorcycle_cart_items = require('../models/motorcycle_cart_item');
 var User = require('../models/user');
 var async = require('async');
 const { body,validationResult } = require("express-validator");
@@ -13,8 +13,8 @@ exports.cart_show = function (req, res, next) {
       user: function(callback) {
             
         User.findById(req.params.id)
-          .populate('gear_cart_item')
-          .populate('motorcycle_cart_item')
+          .populate('gear_cart_items')
+          .populate('motorcycle_cart_items')
           .exec(callback);
     },
 
