@@ -17,10 +17,12 @@ exports.cart_show = function (req, res, next) {
     },
       user_motorcycle_cart_items : function(callback) {
           MotorcycleCartItem.find({'user' : req.params.id})
+          .populate('motorcycle')
           .exec(callback);
       },
       user_gear_cart_items: function(callback){
           GearCartItem.find({'user': req.params.id})
+          .populate('gear')
           .exec(callback);
       }
     }, function(err, results) {
