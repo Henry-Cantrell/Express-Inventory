@@ -70,7 +70,6 @@ exports.gear_create_post =  [
   body('brand', 'brand required').trim().isLength({ min: 1 }).escape(),
   body('gear_type', 'gear_type required').trim().isLength({ min: 1 }).escape(),
   body('listing_creator', 'User must not be empty').trim().isLength({ min: 1 }).escape(),
-  body('count', 'Must not be zero').trim().isLength({min: 1}).escape(),
 
   // Process request after validation and sanitization.
   (req, res, next) => {
@@ -85,7 +84,6 @@ exports.gear_create_post =  [
         brand: req.body.brand,
         gear_type: req.body.gear_type,
         listing_creator: req.body.listing_creator,
-        count: count,
       }
     );
 
