@@ -134,13 +134,13 @@ exports.gear_update_get = function(req, res, next) {
     // Get gear, manufacturers and types for form.
     async.parallel({
         gear: function(callback) {
-            gear.findById(req.params.id).populate('type').populate('manufacturer').exec(callback);
+            Gear.findById(req.params.id).populate('gear_type').populate('brand').exec(callback);
         },
-        types: function(callback) {
-            Type.find(callback);
+        gear_types: function(callback) {
+            GearType.find(callback);
         },
-        manufacturers: function(callback) {
-            Manufacturer.find(callback);
+        brands: function(callback) {
+            Brand.find(callback);
         },
         }, function(err, results) {
             if (err) { return next(err); }
@@ -151,7 +151,7 @@ exports.gear_update_get = function(req, res, next) {
             }
             // Success.
             
-            res.render('gear_form', { title: 'Update gear', types:results.types, manufacturers:results.manufacturers, gear: results.gear });
+            res.render('gear_form', { title: 'Update gear', gear_types:results.gear_types, brands:results.brands, gear: results.gear });
         });
 
 };
@@ -175,7 +175,7 @@ exports.gear_update_post = [
         const errors = validationResult(req);
 
         // Create a gear object with escaped/trimmed data and old id.
-        var gear = new gear(
+        var gear = new Gear(
           { gear_name: req.body.gear_name,
             brand: req.body.brand,
             summary: req.body.summary,
@@ -187,21 +187,21 @@ exports.gear_update_post = [
             // There are errors. Render form again with sanitized values/error messages.
 
             async.parallel({
-                brand: function(callback) {
+                brands: function(callback) {
                     Brand.find(callback);
                 },
-                type: function(callback) {
+                gear_types: function(callback) {
                     GearType.find(callback);
                 },
             }, function(err, results) {
                 if (err) { return next(err); }
-                res.render('gear_form', { title: 'Update gear',type:results.type, brand:results.brand, gear: gear, errors: errors.array() });
+                res.render('gear_form', { title: 'Update gear',gear_types:results.gear_types, brands:results.brands, gear: gear, errors: errors.array() });
             });
             return;
         }
         else {
             // Data from form is valid. Update the record.
-            gear.findByIdAndUpdate(req.params.id, gear, {}, function (err,thegear) {
+            Gear.findByIdAndUpdate(req.params.id, gear, {}, function (err,thegear) {
                 if (err) { return next(err); }
                    // Successful - redirect to gear detail page.
                    res.redirect(thegear.url);
