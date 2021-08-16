@@ -92,7 +92,6 @@ exports.motorcycle_create_post = [
   body('summary', 'Summary must not be empty.').trim().isLength({ min: 1 }).escape(),
   body('type', 'Type must not be empty').trim().isLength({ min: 1 }).escape(),
   body('listing_creator', 'User must not be empty').trim().isLength({ min: 1 }).escape(),
-  body('count', 'Must not be zero').trim().isLength({min: 1}).escape(),
   // Process request after validation and sanitization.
   (req, res, next) => {
 
@@ -106,7 +105,6 @@ exports.motorcycle_create_post = [
           summary: req.body.summary,
           type: req.body.type,
           listing_creator: req.body.listing_creator,
-          count: count
          });
 
       if (!errors.isEmpty()) {

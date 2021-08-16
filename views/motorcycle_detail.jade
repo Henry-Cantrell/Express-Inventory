@@ -8,7 +8,6 @@ block content
   p #[strong Summary:] #{motorcycle.summary}
   p #[strong Type:] #{motorcycle.type.name}
   p #[strong Seller:] #{motorcycle.listing_creator.username}
-  p #[strong Stocked:] #{motorcycle.count}
 
   if(currentUser)
    form(method= 'POST', action='/cart/motorcycle/add')
