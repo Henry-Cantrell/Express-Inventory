@@ -17,9 +17,12 @@ block content
   else 
    p #[strong Please login to purchase this item]
 
-  p
-    a(href=motorcycle.url+'/update') Update Motorcycle
+  if(currentUser)
+   if(currentUser.username == motorcycle.listing_creator.username)
+    p(style="margin-top:10px")
+     a(href=motorcycle.url+'/update' class="btn btn-secondary") Update Motorcycle
+   else
+    p 
 
-  // There should probably be a form to submit Motorcycle obj to controller for cart additions
 
     
