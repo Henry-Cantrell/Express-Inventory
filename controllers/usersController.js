@@ -38,9 +38,49 @@ const User = require('../models/user');
 
 // Listings get method
 
-exports.user_listings_get = function (req, res) {
-res.render("user_listings");
-}
+//lookup motorcycle and gear items with user ID
+//give to page for render
+
+exports.user_listings_get = function(req, res, next) {
+
+  //Retrieve all motorcycles and gears
+  
+  async.parallel({
+    motorcycles: function(callback) {
+        Motorcycle.where;
+    },
+    gears: function(callback) {
+        Gear.where();
+    },
+  }, function(err, results) {
+    if (err) { return next(err); }
+    res.render('user_listings', { motorcycles: results.motorcycles, gears: results.gears });
+  });
+  };
+
+  exports.user_listings_get = function(req, res, next) {
+
+    // Get gear, manufacturers and types for form.
+    async.parallel({
+        gear: function(callback) {
+            Gear.find().where('listing_creator' == req.body.id)
+        },
+        motorcycles: function(callback) {
+            Motorcycle.find().where('listing_creator' == req.body.id);
+        },
+        }, function(err, results) {
+            if (err) { return next(err); }
+            if (results.gear==null || results.motorcycles == null) { // No results.
+                var err = new Error('Not found');
+                err.status = 404;
+                return next(err);
+            }
+            // Success.
+            
+            res.render('guser_listings', { title: 'Update gear', motorcycles: results.motorcycles, gears: results.gears });
+        });
+
+};
 
 // Signup get method
 
