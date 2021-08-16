@@ -128,11 +128,84 @@ exports.gear_delete_post = function(req, res) {
 };
 
 // Display gear update form on GET.
-exports.gear_update_get = function(req, res) {
-    res.send('NOT IMPLEMENTED: gear update GET');
+
+exports.gear_update_get = function(req, res, next) {
+
+    // Get gear, manufacturers and types for form.
+    async.parallel({
+        gear: function(callback) {
+            gear.findById(req.params.id).populate('type').populate('manufacturer').exec(callback);
+        },
+        types: function(callback) {
+            Type.find(callback);
+        },
+        manufacturers: function(callback) {
+            Manufacturer.find(callback);
+        },
+        }, function(err, results) {
+            if (err) { return next(err); }
+            if (results.gear==null) { // No results.
+                var err = new Error('gear not found');
+                err.status = 404;
+                return next(err);
+            }
+            // Success.
+            
+            res.render('gear_form', { title: 'Update gear', types:results.types, manufacturers:results.manufacturers, gear: results.gear });
+        });
+
 };
 
+
 // Handle gear update on POST.
-exports.gear_update_post = function(req, res) {
-    res.send('NOT IMPLEMENTED: gear update POST');
-};
+
+exports.gear_update_post = [
+   
+    // Validate and sanitize fields.
+    body('gear_name', 'Name must not be empty.').trim().isLength({ min: 1 }).escape(),
+    body('brand', 'Brand must not be empty.').trim().isLength({ min: 1 }).escape(),
+    body('summary', 'Summary must not be empty.').trim().isLength({ min: 1 }).escape(),
+    body('gear_type', 'Type must not be empty').trim().isLength({ min: 1 }).escape(),
+    body('listing_creator', 'Creator must not be empty').trim().isLength({ min: 1 }).escape(),
+
+    // Process request after validation and sanitization.
+    (req, res, next) => {
+
+        // Extract the validation errors from a request.
+        const errors = validationResult(req);
+
+        // Create a gear object with escaped/trimmed data and old id.
+        var gear = new gear(
+          { gear_name: req.body.gear_name,
+            brand: req.body.brand,
+            summary: req.body.summary,
+            gear_type: req.body.gear_type,
+            _id: req.params.id
+           });
+
+        if (!errors.isEmpty()) {
+            // There are errors. Render form again with sanitized values/error messages.
+
+            async.parallel({
+                brand: function(callback) {
+                    Brand.find(callback);
+                },
+                type: function(callback) {
+                    GearType.find(callback);
+                },
+            }, function(err, results) {
+                if (err) { return next(err); }
+                res.render('gear_form', { title: 'Update gear',type:results.type, brand:results.brand, gear: gear, errors: errors.array() });
+            });
+            return;
+        }
+        else {
+            // Data from form is valid. Update the record.
+            gear.findByIdAndUpdate(req.params.id, gear, {}, function (err,thegear) {
+                if (err) { return next(err); }
+                   // Successful - redirect to gear detail page.
+                   res.redirect(thegear.url);
+                });
+        }
+    }
+];
