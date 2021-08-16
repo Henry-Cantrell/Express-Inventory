@@ -17,5 +17,11 @@ block content
   else 
    p #[strong Please login to purchase this item]
   
+  if(currentUser)
+   if(currentUser.username == gear.listing_creator.username)
+    p(style="margin-top:10px")
+     a(href=gear.url+'/update' class="btn btn-secondary") Update Gear
+   else
+    p 
 
     
